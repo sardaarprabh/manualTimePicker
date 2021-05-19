@@ -1,0 +1,143 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: #1e1e1e;
+}
+.picker-input{
+    width: 40vw;
+    height: 3rem;
+    border: 3px solid #70afd3;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: relative;
+    cursor: pointer;
+    color: white;
+    font-size: 2.5rem;
+    padding: 0 1rem;
+    text-align: center;
+}
+.picker-wrapper{
+    background-color: white;
+    display: inline-flex;
+    flex-direction: column;
+    position: absolute;
+    left: 50%;
+    top: 45vh;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.preview{
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    background-color: #51bdf9;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.preview-val{
+    padding: 0.5rem;
+    font-size: 3rem;
+    cursor: default;
+}
+
+.dial-wrapper{
+    background-color: #f0f0f0;
+    margin: 2rem 1rem;
+    padding: 1rem;
+    border: 1px transparent;
+    border-radius: 100rem;
+}
+
+.picker-dial{
+    width: 260px;
+    height: 260px;
+    border-radius: 100rem;
+    background-color: #f0f0f0;
+    position: relative;
+}
+.picker-dial::before{
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #51bdf9;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 10rem;
+}
+
+.dial-sector{
+    height: 50%;
+    width: 3rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(calc(30deg * var(--i)));
+    transform-origin: bottom center;
+    /* clip-path: polygon(0% 0, 100% 0%, 50% 100%, 0 0%); */
+    position: absolute;
+}
+
+.sector-line{
+    width: 2px;
+    height: 100%;
+    background-color: #51bdf9;
+    position: absolute;
+    /* z-index: 101; */
+    left: 50%;
+    transform: translateX(-50%);
+}
+.sector-selector{
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    top: 20%;
+}
+
+.sector-val{
+    position: absolute;
+    text-align: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #51bdf9;
+    color: #6c6c6c;
+    left: 50%;
+    transform: translateX(-50%) rotate(calc(-30deg * var(--i)));
+    border-radius: 10rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+
+.mins-minor{
+    width: 10px;
+    height: 10px;
+    background-color: #f0f0f0;
+    top: 15%;
+    border: 3px solid #51bdf9;
+}
+
+.btns{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 1rem;
+}
+
+.btn{
+    color:#51bdf9;
+    font-weight: bold;
+    margin-right: 1rem;
+    cursor: pointer;
+}

@@ -1,0 +1,43 @@
+<body>
+    <div *ngIf = "!showPicker" class = "picker-input" (click) = "showPicker = true">{{ selectedHour }} : {{ selectedMinute }} {{ isAM ? 'AM' : 'PM' }}</div>
+    <div *ngIf = "showPicker" class="picker-wrapper" (document:mouseup)="mouseUp()">
+        <div class="preview">
+            <div class="preview-val" (click) = "selectingHours = true">{{ (hoursWheel[selectedHour] <= 9) ? '0' : '' }}{{ hoursWheel[selectedHour] }}</div>
+            <div class="preview-val" style = "color: #a9defc">:</div>
+            <div class="preview-val" (click) = "selectingHours = false">{{ (selectedMinute <= 9) ? '0' : '' }}{{ selectedMinute }}</div>
+            <div class="preview-val" style = "flex-direction: column; font-size: 1.2rem;">
+                <div [ngStyle] = "{color: !isAM ? '#a9defc' : 'white'}" (click) = "isAM = true;">AM</div>
+                <div [ngStyle] = "{color: isAM ? '#a9defc' : 'white'}" (click) = "isAM = false;">PM</div>
+            </div>
+        </div>
+        <div class="dial-wrapper">
+            <div *ngIf = "selectingHours" class="picker-dial" (mouseleave)="mouseExit()" (mousedown)="mouseDown(); false;">
+                <div *ngFor="let hour of hoursWheel; let i = index" class="dial-sector" [style.--i]="i" (mouseenter)="mouseEnter()"
+                    (mousedown)="mouseDown()" (click) = "selectByClick('selectedHour', i)">
+                    <div *ngIf="selectedHour == i" class="sector-line"></div>
+                    <div class="sector-val"
+                        [ngStyle]="{'background-color' : selectedHour == i ? '#51bdf9' : 'transparent', 'color' : selectedHour == i ? 'white' : '#6c6c6c'}">
+                        {{ hour }}</div>
+                    <div class="sector-selector" (mouseover)="mouseOver('selectedHour', i)"></div>
+                </div>
+            </div>
+
+            <div *ngIf = "!selectingHours" class="picker-dial" (mouseleave)="mouseExit()" (mousedown)="mouseDown(); false;">
+                <div *ngFor="let min of minutesWheel; let i = index" class="dial-sector" style = "width: 1rem; transform: translateX(-50%) rotate(calc(6deg * var(--i)));" [style.--i]="i" (mouseenter)="mouseEnter()"
+                    (mousedown)="mouseDown()"   (click) = "selectByClick('selectedMinute', i)">
+                    <div *ngIf="selectedMinute == i" class="sector-line" style = "height: 85%; top: 15%"></div>
+                    <div class="sector-val" style = "transform: translateX(-50%) rotate(calc(-6deg * var(--i)));" *ngIf = "i % 5 == 0"
+                        [ngStyle]="{'background-color' : selectedMinute == i ? '#51bdf9' : 'transparent', 'color' : selectedMinute == i ? 'white' : '#6c6c6c'}">
+                        {{ min }}</div>
+                    <div *ngIf = "i % 5 != 0" class = "sector-val mins-minor" [ngStyle]="{'border-color' : selectedMinute == i ? '#51bdf9' : 'transparent'}" ></div>
+                    <div class="sector-selector" (mouseover)="mouseOver('selectedMinute', i)"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="btns">
+            <div class="btn" (click) = "showPicker = false">OK</div>
+        </div>
+    </div>
+
+</body>
